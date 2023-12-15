@@ -64,7 +64,7 @@ def show_accuracy(used_model, chosen_size):
 
 # app
 
-st.title("Taak 3 - Deep Learning")
+st.title("Taak 3 - Deep Learning - Image Classification")
 st.subheader("van Lander Jacobs")
 st.write("Hier is het mogelijk om een aantal modellen te zien die ik heb getraind, dit zijn de meest interessante modellen die ik er uit heb gepikt.")
 
