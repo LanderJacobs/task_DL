@@ -69,7 +69,10 @@ st.subheader("van Lander Jacobs")
 st.write("Hier is het mogelijk om een aantal modellen te zien die ik heb getraind, dit zijn de meest interessante modellen die ik er uit heb gepikt.")
 
 option_box = ["model_dl_task3", "model_dl_task3_50_small", "model_dl_task3_500_epochs", "model_dl_task3_1000_epochs"]
-text_option = ["Dit model is getraind op afbeeldingen resized naar 256x256, voor 20 epochs", "Dit model is getraind op afbeeldingen resized naar 64x64, voor 50 epochs", "Dit model is getraind op afbeeldingen resized naar 64x64, voor 500 epochs", "Dit model is getraind op afbeeldingen resized naar 64x64, voor 1000 epochs"]
+text_option = ["Dit model is getraind op afbeeldingen resized naar 256x256, voor 20 epochs.",
+               "Dit model is getraind op afbeeldingen resized naar 64x64, voor 50 epochs.\nHet model begint hierna zeer hard te overfitten, 50 is zeker de limiet.",
+               "Dit model is getraind op afbeeldingen resized naar 64x64, voor 500 epochs.\nDit model is overfit maar doet het desondanks nog wel goed op de test_set.",
+               "Dit model is getraind op afbeeldingen resized naar 64x64, voor 1000 epochs.\nDit model is zeer overfit maar doet het desondanks nog wel goed op de test_set."]
 size_option = [256, 64, 64, 64]
 size = 64
 

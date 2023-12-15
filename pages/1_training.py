@@ -115,8 +115,31 @@ def train_model(epoch_count, size):
               loss = 'categorical_crossentropy',
               metrics = ['accuracy'])
     
-    model.fit(training_set, validation_data= validation_set, steps_per_epoch=10, epochs=epoch_count)
-    return model
+    history = model.fit(training_set, validation_data= validation_set, steps_per_epoch=10, epochs=epoch_count)
+    return [model, history]
+
+def show_loss_acc(history):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10,5))
+
+    # Plot the loss curves on the first subplot
+    ax1.plot(history.history['loss'], label='training loss')
+    ax1.plot(history.history['val_loss'], label='validation loss')
+    ax1.set_title('Loss curves')
+    ax1.set_xlabel('Epoch')
+    ax1.set_ylabel('Loss')
+    ax1.legend()
+
+    # Plot the accuracy curves on the second subplot
+    ax2.plot(history.history['accuracy'], label='training accuracy')
+    ax2.plot(history.history['val_accuracy'], label='validation accuracy')
+    ax2.set_title('Accuracy curves')
+    ax2.set_xlabel('Epoch')
+    ax2.set_ylabel('Accuracy')
+    ax2.legend()
+
+    fig.tight_layout()
+
+    return fig
 
 # Variables
 
@@ -125,17 +148,25 @@ size = 64
 # App
 
 st.title("Zelf trainen")
-st.write("Hier kun je zelf wat dingen aanpassen.")
+st.write("Hier kun je het aantal epochs aanpassen om te zien hoe goed verschillende aantallen werken. We kunnen wel niet te ver gaan anders kan streamlit crashen.")
 
-slider_value = st.slider(label="Aantal epochs", min_value=1, max_value=25)
+slider_value = st.slider(label="Aantal epochs", min_value=1, max_value=50)
 
 train_value = st.button("Train")
 
 if train_value == True:
-    with st.spinner("Trainen"):
-        model = train_model(slider_value, size)
+    with st.spinner("Aan het trainen"):
+        result = train_model(slider_value, size)
+        model = result[0]
+        history = result[1]
+
+        # loss and accuracy
+
+        st.subheader("Accuracy en loss met " + str(slider_value) + " epochs")
+        st.pyplot(show_loss_acc(history))
+
+        # confusion_matrix        
         st.subheader("Confusion matrix met " + str(round(show_accuracy(model, size) * 100, 0)) + " % accuraatheid")
-        st.subheader("Met " + str(slider_value) + " epochs")
 
         cm_display = show_confusion_matrix(model, size)
 
