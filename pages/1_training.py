@@ -150,7 +150,7 @@ size = 64
 st.title("Zelf trainen")
 st.write("Hier kun je het aantal epochs aanpassen om te zien hoe goed verschillende aantallen werken. We kunnen wel niet te ver gaan anders kan streamlit crashen.")
 
-slider_value = st.slider(label="Aantal epochs", min_value=1, max_value=50)
+slider_value = st.slider(label="Aantal epochs", min_value=1, max_value=25)
 
 train_value = st.button("Train")
 
